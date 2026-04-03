@@ -1,0 +1,626 @@
+{
+  "name": "Hackatron Idea",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "QC - Root Cause Analysis",
+        "formDescription": "Get analyzed and summarized data of target LOTNO by AI Assistant in QC Role\n\nRemark: Processing time around 30 seconds. Please wait until it's done.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "LOTNO",
+              "placeholder": "Enter LOTNO (e.g. LOTMT2775, LOTMT0020)",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Submit",
+          "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -480,
+        128
+      ],
+      "id": "e807e489-6c32-48a8-a75c-a1590eceb78e",
+      "name": "Get submission data from UI Form",
+      "webhookId": "ab1de475-6d06-4f79-9297-999c7c3ca8b1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "45c3e599-f936-4aa1-b730-bb63899828a9",
+              "leftValue": "={{ $json.LOTNO }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "0ee8b29e-f43c-44e5-a782-4532b0ff359f",
+              "leftValue": "={{ $json.LOTNO }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -224,
+        128
+      ],
+      "id": "b2c35099-8f88-4aef-a8a0-2b8272c3296a",
+      "name": "Check if LOTNO field is exist"
+    },
+    {
+      "parameters": {
+        "content": "## Tool's Note #1\nsearching target LOTNO in HISTORY table to confirm this LOTNO's information",
+        "height": 320,
+        "width": 256
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -160
+      ],
+      "id": "fddaebd6-7687-43bb-999e-6ab8f4c0b718",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "14oAlRNu1WW4Rr2fId7gD_fiukk8F9_cJweEK90zNFps",
+          "mode": "list",
+          "cachedResultName": "mtl_lot_info",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/14oAlRNu1WW4Rr2fId7gD_fiukk8F9_cJweEK90zNFps/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 764215316,
+          "mode": "list",
+          "cachedResultName": "mtl_lot_info.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/14oAlRNu1WW4Rr2fId7gD_fiukk8F9_cJweEK90zNFps/edit#gid=764215316"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "lotno",
+              "lookupValue": "={{ $json.LOTNO }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        32,
+        -16
+      ],
+      "id": "11bc0936-8ff2-482c-8879-c76de08b3083",
+      "name": "Searching in LOT_INFO HISTORY Database",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "c0wHPquDn5fxuI2x",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -16
+      ],
+      "id": "f2aa5161-d0d7-4851-ab7f-85700ac5988a",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "showText",
+        "responseText": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>QC - Root Cause Analysis</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #f4f7f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n\n        .error-container {\n            text-align: center;\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 4px 15px rgba(0,0,0,0.1);\n            max-width: 400px;\n            width: 90%;\n        }\n\n        .icon-box {\n            font-size: 50px;\n            color: #e74c3c;\n            margin-bottom: 20px;\n        }\n\n        h2 {\n            color: #2c3e50;\n            margin-bottom: 10px;\n            font-size: 24px;\n        }\n\n        p {\n            color: #7f8c8d;\n            line-height: 1.6;\n            margin-bottom: 25px;\n        }\n\n        .btn-retry {\n            display: inline-block;\n            background-color: #3498db;\n            color: white;\n            padding: 12px 25px;\n            text-decoration: none;\n            border-radius: 6px;\n            transition: background 0.3s ease;\n        }\n\n        .btn-retry:hover {\n            background-color: #2980b9;\n        }\n\n        /* Subtle shake animation to draw attention */\n        .shake {\n            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;\n        }\n\n        @keyframes shake {\n            10%, 90% { transform: translate3d(-1px, 0, 0); }\n            20%, 80% { transform: translate3d(2px, 0, 0); }\n            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }\n            40%, 60% { transform: translate3d(4px, 0, 0); }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"error-container shake\">\n        <div class=\"icon-box\">⚠️</div>\n        <h2>QC Searching Incompleted!</h2>\n        <p>It looks like you didn't enter anything to search for. Please provide a LOTNO to continue.</p>\n        <a href=\"https://pongthorn1999.app.n8n.cloud/form/ab1de475-6d06-4f79-9297-999c7c3ca8b1\" class=\"btn-retry\">Go Back & Try Again</a>\n    </div>\n\n</body>\n</html>"
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        2096,
+        320
+      ],
+      "id": "b5746d1d-448b-4160-9eea-8086518a2024",
+      "name": "Return Result to user (Path 3: No Input)",
+      "webhookId": "f676e373-d89d-46c4-bc7b-b4c78c1f428e"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "showText",
+        "responseText": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>QC Analysis - No Data Found</title>\n    <style>\n        :root {\n            --primary-blue: #2c3e50;\n            --accent-orange: #f39c12;\n            --light-gray: #f4f7f6;\n            --text-muted: #7f8c8d;\n        }\n\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: var(--light-gray);\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n\n        .search-container {\n            background: white;\n            padding: 2rem;\n            border-radius: 8px;\n            box-shadow: 0 4px 15px rgba(0,0,0,0.1);\n            max-width: 500px;\n            width: 90%;\n            text-align: center;\n            border-top: 5px solid var(--primary-blue);\n        }\n\n        .icon-wrapper {\n            font-size: 4rem;\n            color: var(--accent-orange);\n            margin-bottom: 1rem;\n        }\n\n        h2 {\n            color: var(--primary-blue);\n            margin-bottom: 0.5rem;\n        }\n\n        p {\n            color: var(--text-muted);\n            line-height: 1.6;\n        }\n\n        .factor-tags {\n            margin-top: 1.5rem;\n            display: flex;\n            justify-content: center;\n            gap: 10px;\n            flex-wrap: wrap;\n        }\n\n        .tag {\n            background: #ebedef;\n            padding: 5px 12px;\n            border-radius: 20px;\n            font-size: 0.85rem;\n            color: var(--primary-blue);\n            font-weight: 600;\n            border: 1px solid #dcdde1;\n        }\n\n        .btn-retry {\n            margin-top: 2rem;\n            display: inline-block;\n            background: var(--primary-blue);\n            color: white;\n            padding: 10px 25px;\n            text-decoration: none;\n            border-radius: 4px;\n            transition: background 0.3s ease;\n        }\n\n        .btn-retry:hover {\n            background: #34495e;\n        }\n    </style>\n</head>\n<body>\n\n<div class=\"search-container\">\n    <div class=\"icon-wrapper\">🔍</div>\n    <h2>No Analysis Found</h2>\n    <p>We searched the database but couldn't find any Root Cause Analysis (RCA) records matching your specific LOTNO criteria.</p>\n    \n    <div class=\"factor-tags\">\n        <span class=\"tag\">Man</span>\n        <span class=\"tag\">Material</span>\n        <span class=\"tag\">Defective</span>\n    </div>\n\n    <hr style=\"margin: 20px 0; border: 0; border-top: 1px solid #eee;\">\n    \n    <p style=\"font-size: 0.9rem;\">\n        Try adjusting your LOTNO target or ensure the <strong>Defective Type</strong> is correctly categorized in the system.\n    </p>\n\n    <a href=\"https://pongthorn1999.app.n8n.cloud/form/ab1de475-6d06-4f79-9297-999c7c3ca8b1\" class=\"btn-retry\">New Search</a>\n</div>\n\n</body>\n</html>"
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        2096,
+        96
+      ],
+      "id": "1e20d368-6d1d-4977-9b1d-fdc82f45b1c4",
+      "name": "Return Result to user (Path 2: Unmatched)",
+      "webhookId": "74006566-4261-4f03-8764-575a02343c49"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.messages[0].content }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        1168,
+        -112
+      ],
+      "id": "fe985efc-d1cd-4d62-94b5-89564733f713",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "blHEkgAmQBYuhjJX",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let ref_data = $input.first().json.data\nlet ground_data = ref_data.map(obj => {\n  return Object.fromEntries(\n    Object.entries(obj).map(([key, value]) => {\n      // Logic: If value is null, undefined, or an empty string, replace it\n      const isInvalid = value === null || value === undefined || value === \"\";\n      return [key, isInvalid ? \"No Data\" : value];\n    })\n  );\n});\n\n\nlet prompt = {\n  \"model\": \"gpt-5.2\",\n  \"messages\": [\n    {\n      \"role\": \"user\", \n      \"content\": `Role & Objective: You are the QC Assistant, an expert Quality Control Analyst specializing in root cause analysis and production auditing. \n      Your task is to analyze and summarize a specific LOTNO (Lot Number) provided by the user and evaluate its quality stability based on 3 primary factors: Defective, Machine, Material.\n\nInput Handling:\nTarget LOTNO: \"\"\"${$input.first().json.data[0].lotno}\"\"\"\n\nGround Data: \"\"\"${JSON.stringify(ground_data)}\"\"\"\n\nAnalysis Framework (The 4Ms)\n  - Man: Identify operator skill levels, shift fatigue, or training gaps during the production of this lot.\n  - Defective: Analyze defective modes, total count that might lead to error operation.\n  - Material: Check raw material batch consistency, supplier variances, or storage conditions.\n\nOutput Requirements\nFormat: Valid HTML. start & end with <html> tag.\nHTML also have section for return to the form page with link \"https://pongthorn1999.app.n8n.cloud/form/ab1de475-6d06-4f79-9297-999c7c3ca8b1\" and display text \"Return to QC Form\"\n\nStructure: A clean and short summary dashboard with some text explaination and dropdown.`\n    }\n  ]\n}\n\nreturn {json:prompt};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        816,
+        -112
+      ],
+      "id": "d1b5864a-65a0-424a-b2d4-98912496de31",
+      "name": "Initial Prompt for LLM"
+    },
+    {
+      "parameters": {
+        "content": "## Tool's Note #2\nInitial Prompt with Grounded data from Tool #1;\n\nTell LLM that it needs to analyze and summary data and then return output as HTML format",
+        "height": 320,
+        "width": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        704,
+        -288
+      ],
+      "id": "c13289b2-9193-4e30-81e8-46a147bee8c0",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9d51bbcd-6a90-491e-9725-bbf6ec5d5f8c",
+              "leftValue": "={{ $json.data[0] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        544,
+        -16
+      ],
+      "id": "76cde927-b6c5-4ad5-892a-56cb11d909c0",
+      "name": "Check if LOTNO is exist in HISTORY"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1WC7LMV49P3oQAhFh43eOePyAdqOqMwnZAfKYguHeWNo",
+          "mode": "list",
+          "cachedResultName": "lot_material_info",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WC7LMV49P3oQAhFh43eOePyAdqOqMwnZAfKYguHeWNo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1977296725,
+          "mode": "list",
+          "cachedResultName": "lot_material_info.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WC7LMV49P3oQAhFh43eOePyAdqOqMwnZAfKYguHeWNo/edit#gid=1977296725"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "lotno",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', `extract lotno from user's request`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1072,
+        -352
+      ],
+      "id": "ffff0dbb-78d5-49cf-a128-7e14174e107b",
+      "name": "Get Data from MATERIAL table",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "c0wHPquDn5fxuI2x",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1lR_qqf8FSGuaaLcwZxSa1MYFsuELwqtVew1jJdUcojk",
+          "mode": "list",
+          "cachedResultName": "lot_human_info",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lR_qqf8FSGuaaLcwZxSa1MYFsuELwqtVew1jJdUcojk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 326854524,
+          "mode": "list",
+          "cachedResultName": "lot_human_info.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lR_qqf8FSGuaaLcwZxSa1MYFsuELwqtVew1jJdUcojk/edit#gid=326854524"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "lotno",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', `extract lotno from user's request`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1248,
+        -352
+      ],
+      "id": "05600234-71b7-4b3b-928b-47dd8d1874c4",
+      "name": "Get Data from MAN table",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "c0wHPquDn5fxuI2x",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1GCQLW4z4e8C9Gq6Pl7gSs3FqmoNGoh6VYgqOzuYLMZs",
+          "mode": "list",
+          "cachedResultName": "lot_defective_info",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GCQLW4z4e8C9Gq6Pl7gSs3FqmoNGoh6VYgqOzuYLMZs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1595445626,
+          "mode": "list",
+          "cachedResultName": "lot_defective_info.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GCQLW4z4e8C9Gq6Pl7gSs3FqmoNGoh6VYgqOzuYLMZs/edit#gid=1595445626"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "lotno",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', `extract lotno from user's request`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1424,
+        -352
+      ],
+      "id": "21efff2a-bead-4b44-b8f0-81e2d3931fbf",
+      "name": "Get Data from DEFECTIVE table",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "c0wHPquDn5fxuI2x",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.content }}"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1808,
+        -112
+      ],
+      "id": "1c4a0f1d-3722-4b7a-9feb-b2bbb3b11370",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "showText",
+        "responseText": "={{ $json.html }}"
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        2096,
+        -112
+      ],
+      "id": "4be879d1-abb8-4a96-a1c7-1c5b0782c39d",
+      "name": "Return Result to user (Path 1: completed flow)",
+      "webhookId": "4fd554f8-7528-4d50-b46b-ad39943ff8c8"
+    },
+    {
+      "parameters": {
+        "content": "## LLM's Tool for connect to database",
+        "height": 256,
+        "width": 528
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        -432
+      ],
+      "id": "b5df7879-fb5f-4349-9be2-af82cb3e775b",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "270d37c0-7acb-41b3-a2e2-65becfcdcffb",
+              "name": "content",
+              "value": "={{ $json.content.parts[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1552,
+        -112
+      ],
+      "id": "a4684849-2a8a-4719-9bfb-093a64072d9f",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get submission data from UI Form": {
+      "main": [
+        [
+          {
+            "node": "Check if LOTNO field is exist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if LOTNO field is exist": {
+      "main": [
+        [
+          {
+            "node": "Searching in LOT_INFO HISTORY Database",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Result to user (Path 3: No Input)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Searching in LOT_INFO HISTORY Database": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Check if LOTNO is exist in HISTORY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initial Prompt for LLM": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if LOTNO is exist in HISTORY": {
+      "main": [
+        [
+          {
+            "node": "Initial Prompt for LLM",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Result to user (Path 2: Unmatched)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data from MATERIAL table": {
+      "ai_tool": [
+        [
+          {
+            "node": "Message a model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data from MAN table": {
+      "ai_tool": [
+        [
+          {
+            "node": "Message a model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data from DEFECTIVE table": {
+      "ai_tool": [
+        [
+          {
+            "node": "Message a model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Return Result to user (Path 1: completed flow)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "395ec29b-9e7f-478e-9be3-648fab4871cd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7295d16e4e9cd0401a44d0f937aacbaf98fffdf811b4c7f16a4fdc9258f616d6"
+  },
+  "id": "pRzxI9qzEkKMjvtC",
+  "tags": []
+}
